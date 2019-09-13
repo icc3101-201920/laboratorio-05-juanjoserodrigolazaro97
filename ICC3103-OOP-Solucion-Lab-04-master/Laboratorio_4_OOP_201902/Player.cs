@@ -108,9 +108,9 @@ namespace Laboratorio_4_OOP_201902
         {
 
             
-            if (Deck.Cards[cardId].GetType().Name == nameof(CombatCard))
+            if (deck.Cards[cardId].GetType().Name == nameof(CombatCard))
             {
-                CombatCard carta = (CombatCard) Deck.Cards[cardId];
+                CombatCard carta = (CombatCard) deck.Cards[cardId];
           
                 var na = carta.Name;
                 var ty = carta.Type;
@@ -121,13 +121,13 @@ namespace Laboratorio_4_OOP_201902
                
 
 
-                Hand.AddCard(carta2);
+                hand.AddCard(carta2);
 
-                Deck.DestroyCard(cardId);
+                deck.DestroyCard(cardId);
 
             }
             else {
-                SpecialCard carta = (SpecialCard)Deck.Cards[cardId];
+                SpecialCard carta = (SpecialCard)deck.Cards[cardId];
 
                 var na = carta.Name;
                 var ty = carta.Type;
@@ -138,9 +138,9 @@ namespace Laboratorio_4_OOP_201902
 
 
 
-                Hand.AddCard(carta2);
+                hand.AddCard(carta2);
 
-                Deck.DestroyCard(cardId);
+                deck.DestroyCard(cardId);
             }
 
            
@@ -158,9 +158,9 @@ namespace Laboratorio_4_OOP_201902
         {
 
 
-            if(Hand.Cards[cardId].GetType().Name == nameof(CombatCard))
+            if(hand.Cards[cardId].GetType().Name == nameof(CombatCard))
             {
-                CombatCard carta = (CombatCard)Hand.Cards[cardId];
+                CombatCard carta = (CombatCard)hand.Cards[cardId];
 
                 var na = carta.Name;
                 var ty = carta.Type;
@@ -177,14 +177,14 @@ namespace Laboratorio_4_OOP_201902
                 if (carta2.Type == EnumType.buff)
                 {
 
-                    Board.AddCard(carta2, id, buffRow);
+                    board.AddCard(carta2, id, buffRow);
                 }
                 else if (carta2.Type == EnumType.weather)  {
 
-                    Board.AddCard(carta2);
+                    board.AddCard(carta2);
                 }
 
-                Hand.DestroyCard(cardId);
+                hand.DestroyCard(cardId);
 
             }
             else
@@ -202,15 +202,15 @@ namespace Laboratorio_4_OOP_201902
                 if (carta2.Type == EnumType.buff)
                 {
 
-                    Board.AddCard(carta2, id, buffRow);
+                    board.AddCard(carta2, id, buffRow);
                 }
                 else if (carta2.Type == EnumType.weather)
                 {
 
-                    Board.AddCard(carta2);
+                    board.AddCard(carta2);
                 }
 
-                Hand.DestroyCard(cardId);
+                hand.DestroyCard(cardId);
             }
 
 
@@ -231,18 +231,57 @@ namespace Laboratorio_4_OOP_201902
         }
         public void ChangeCard(int cardId)
         {
-            /* Debe cambiar la carta en la posicion cardId de la mano por una carta aleatoria del mazo.
-                1- Defina si la carta a cambiar de la mano es CombatCard o SpecialCard. Luego (Esto permite cambiar la referencia):
-                        1.1- Asigne una variable a la carta a cambiar de la mano, ejemplo, CombatCard card = hand.Cards[cardId]
-                        1.2- Cree una CombatCard o SpecialCard (dependiendo del caso) con los valores de la carta de la mano a cambiar.
-                2- Elimine la carta de la mano
-                3- Implemente Random
-                4- Cree una variable que obtenga un numero aleatorio dentro del total de cartas del mazo.
-                5- Obtenga la carta aleatoria del mazo (puede utilizar el método DrawCard) y cree una nueva carta con sus valores. Agreguela a la mano. 
-                6- Elimine la carta aleatoria escogida del mazo.
-                7- Agregue la carta original de la mano al mazo.
-            */
-            throw new NotImplementedException();
+
+            
+
+
+            
+
+            if (hand.Cards[cardId].GetType().Name == nameof(CombatCard))
+            {
+                CombatCard card = (CombatCard) hand.Cards[cardId];
+                CombatCard card2 = new CombatCard(card.Name, card.Type, card.Effect, card.AttackPoints, card.Hero);
+                hand.DestroyCard(cardId);
+                Random rand = new Random();
+                int alea = rand.Next(Deck.Cards.Count);
+                //DrawCard(alea);
+                Card cartaAleatoria = Deck.Cards[alea];
+
+            }
+            else {
+
+                SpecialCard card = (SpecialCard) hand.Cards[cardId];
+                SpecialCard card2 = new SpecialCard(card.Name, card.Type, card.Effect);
+
+                hand.DestroyCard(cardId);
+                Random rand = new Random();
+                int alea = rand.Next(Deck.Cards.Count);
+                //DrawCard(alea);
+
+                if (deck.Cards[alea].GetType().Name == nameof(CombatCard))
+                {
+
+                }
+                else {
+
+                }
+                    
+
+            }
+
+
+                /* Debe cambiar la carta en la posicion cardId de la mano por una carta aleatoria del mazo.
+                    1- Defina si la carta a cambiar de la mano es CombatCard o SpecialCard. Luego (Esto permite cambiar la referencia):
+                            1.1- Asigne una variable a la carta a cambiar de la mano, ejemplo, CombatCard card = hand.Cards[cardId]
+                            1.2- Cree una CombatCard o SpecialCard (dependiendo del caso) con los valores de la carta de la mano a cambiar.
+                    2- Elimine la carta de la mano
+                    3- Implemente Random
+                    4- Cree una variable que obtenga un numero aleatorio dentro del total de cartas del mazo.
+                    5- Obtenga la carta aleatoria del mazo (puede utilizar el método DrawCard) y cree una nueva carta con sus valores. Agreguela a la mano. 
+                    6- Elimine la carta aleatoria escogida del mazo.
+                    7- Agregue la carta original de la mano al mazo.
+                */
+                throw new NotImplementedException();
         }
 
         public void FirstHand()
@@ -250,6 +289,19 @@ namespace Laboratorio_4_OOP_201902
             /*Debe obtener 10 cartas aleatorias del mazo y asignarlas a la mano.
             Utilice el metodo DrawCard con 10 numeros de id aleatorios.
             */
+
+            var i = 0;
+
+            while (i < 10) {
+                Random rand = new Random();
+                int alea = rand.Next(Deck.Cards.Count);
+
+                DrawCard(alea);
+
+                i += 1;
+
+            }
+
             throw new NotImplementedException();
         }
 

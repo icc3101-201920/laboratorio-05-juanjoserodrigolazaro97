@@ -19,11 +19,13 @@ namespace Laboratorio_4_OOP_201902
 
         public void AddCard(Card card)
         {
+            cards.Add(card);
             //Agregue la carta card a la lista cards
             throw new NotImplementedException();
         }
         public void DestroyCard(int cardId)
         {
+            cards.RemoveAt(cardId);
             /* Debe eliminar la carta segun el parametro cardId. Para esto
                 1- Utilice el metodo RemoveAt de las listas para eliminar la carta en cards
             */
@@ -31,6 +33,7 @@ namespace Laboratorio_4_OOP_201902
         }
         public void Shuffle()
         {
+            cards.Sort();
             //Reordenar el mazo de manera aleatoria (barajar).
             throw new NotImplementedException();
         }
