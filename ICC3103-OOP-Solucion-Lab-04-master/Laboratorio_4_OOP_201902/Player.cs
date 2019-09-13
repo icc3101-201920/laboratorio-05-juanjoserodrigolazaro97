@@ -260,10 +260,18 @@ namespace Laboratorio_4_OOP_201902
 
                 if (deck.Cards[alea].GetType().Name == nameof(CombatCard))
                 {
-
+                    CombatCard cartaAleatoria = (CombatCard) deck.Cards[cardId];
+                    CombatCard cartaAleatoria2 = new CombatCard(cartaAleatoria.Name, cartaAleatoria.Type, cartaAleatoria.Effect, cartaAleatoria.AttackPoints, cartaAleatoria.Hero);
+                    hand.AddCard(cartaAleatoria2);
+                    deck.DestroyCard(alea);
+                    deck.AddCard(card);
                 }
                 else {
-
+                    CombatCard cartaAleatoria = (CombatCard) deck.Cards[cardId];
+                    CombatCard cartaAleatoria2 = new CombatCard(cartaAleatoria.Name, cartaAleatoria.Type, cartaAleatoria.Effect, cartaAleatoria.AttackPoints, cartaAleatoria.Hero);
+                    hand.AddCard(cartaAleatoria2);
+                    deck.DestroyCard(alea);
+                    deck.AddCard(card);
                 }
                     
 
